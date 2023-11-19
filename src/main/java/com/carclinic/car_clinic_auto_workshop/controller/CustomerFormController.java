@@ -12,51 +12,46 @@ import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import com.jfoenix.controls.JFXButton;
-import javafx.application.Application;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
-import javafx.scene.Cursor;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Color;
 
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Pattern;
 
 public class CustomerFormController {
 
     public TableColumn emailCol;
     public Label lblName;
-    public Label lblId;
-    public Label lblAddress;
-    public Label lblEmail;
-    public Label lblTel;
+    public TextArea lblId;
+    public TextArea lblAddress;
+    public TextArea lblEmail;
+    public TextArea lblTel;
+    public JFXButton customerAddBtn;
+    public JFXButton customerUpdateBtn;
     @FXML
     private JFXTextField txtdynamicSearch;
 
     @FXML
-    private JFXTextField textCustomerID;
+    private TextField textCustomerID;
 
     @FXML
-    private JFXTextField textCustomerName;
+    private TextField textCustomerName;
 
     @FXML
-    private JFXTextField txtContactNumber;
+    private TextField textCustomerEmail;
 
     @FXML
-    private JFXTextField txtAddress;
+    private TextField textCustomerAddress;
 
     @FXML
-    private JFXTextField txtEmail;
+    private TextField textCustomerNumber;
 
     @FXML
     private TableView<CustomerTM> CustomerTbl;
@@ -78,9 +73,13 @@ public class CustomerFormController {
 
     CustomerModel customerModel = new CustomerModel();
 
+    ObservableList<CustomerTM> observableList = FXCollections.observableArrayList();
+
     public void initialize(){
         setCellValueFactory();
         loadAllCustomers();
+        customerAddBtn.setDisable(true);
+        customerUpdateBtn.setDisable(true);
     }
 
     @FXML
@@ -88,9 +87,9 @@ public class CustomerFormController {
 
         String cusId = textCustomerID.getText();
         String cusName = textCustomerName.getText();
-        String cusAddress = txtAddress.getText();
-        String cusEmail = txtEmail.getText();
-        String cusTel = txtContactNumber.getText();
+        String cusAddress = textCustomerAddress.getText();
+        String cusEmail = textCustomerEmail.getText();
+        String cusTel = textCustomerNumber.getText();
 
         if (validateInput(cusId, cusName, cusAddress, cusTel)) {
             CustomerDTO dto = new CustomerDTO(cusId, cusName, cusAddress, cusEmail, cusTel);
@@ -103,7 +102,7 @@ public class CustomerFormController {
                     clearFields();
                 }
             } catch (SQLException e) {
-                new Alert(Alert.AlertType.ERROR,"Customer not Saved").show();
+                new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
                 e.printStackTrace();
             }
         }
@@ -140,9 +139,9 @@ public class CustomerFormController {
 
         String cusId = textCustomerID.getText();
         String cusName = textCustomerName.getText();
-        String cusAddress = txtAddress.getText();
-        String cusEmail = txtEmail.getText();
-        String cusTel = txtContactNumber.getText();
+        String cusAddress = textCustomerAddress.getText();
+        String cusEmail = textCustomerEmail.getText();
+        String cusTel = textCustomerNumber.getText();
 
         CustomerDTO customerDTO = new CustomerDTO(cusId, cusName, cusAddress, cusEmail, cusTel);
 
@@ -171,7 +170,6 @@ public class CustomerFormController {
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         }
-
     }
 
     public void searchOnAction(ActionEvent actionEvent) {
@@ -184,8 +182,8 @@ public class CustomerFormController {
             if (customerDTO != null){
                 textCustomerID.setText(customerDTO.getCusId());
                 textCustomerName.setText(customerDTO.getCusName());
-                txtAddress.setText(customerDTO.getAddress());
-                txtContactNumber.setText(customerDTO.getTelNum());
+                textCustomerAddress.setText(customerDTO.getAddress());
+                textCustomerNumber.setText(customerDTO.getTelNum());
             }else {
                 new Alert(Alert.AlertType.INFORMATION,"Customer not found").show();
             }
@@ -205,8 +203,6 @@ public class CustomerFormController {
 
     private void setViewBtnAction(Button btn,CustomerDTO customerDTO) {
         btn.setOnAction((e) -> {
-            System.out.println(customerDTO.getCusName());
-            System.out.println(customerDTO.getEmail());
 
             lblName.setText(customerDTO.getCusName());
             lblId.setText(customerDTO.getCusId());
@@ -231,18 +227,13 @@ public class CustomerFormController {
 
     private void setUpdateBtnAction(Button btn,CustomerDTO customerDTO) {
         btn.setOnAction((e) -> {
-            ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
-            ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+            textCustomerID.setText(customerDTO.getCusId());
+            textCustomerName.setText(customerDTO.getCusName());
+            textCustomerEmail.setText(customerDTO.getEmail());
+            textCustomerAddress.setText(customerDTO.getAddress());
+            textCustomerNumber.setText(customerDTO.getTelNum());
 
-            Optional<ButtonType> type = new Alert(Alert.AlertType.INFORMATION, "Are you sure to remove?", yes, no).showAndWait();
-
-            if (type.orElse(no) == yes) {
-//                int focusedIndex = tblOrderCart.getSelectionModel().getSelectedIndex();
-//
-//                obList.remove(focusedIndex);
-//                tblOrderCart.refresh();
-//                calculateTotal();
-            }
+            customerUpdateBtn.setDisable(false);
         });
     }
 
@@ -254,11 +245,22 @@ public class CustomerFormController {
             Optional<ButtonType> type = new Alert(Alert.AlertType.INFORMATION, "Are you sure to remove?", yes, no).showAndWait();
 
             if (type.orElse(no) == yes) {
-//                int focusedIndex = tblOrderCart.getSelectionModel().getSelectedIndex();
-//
-//                obList.remove(focusedIndex);
-//                tblOrderCart.refresh();
-//                calculateTotal();
+
+                String id = customerDTO.getCusId();
+
+                try {
+                    boolean isDelete = customerModel.deleteCustomer(id);
+
+                    if (isDelete){
+                        new Alert(Alert.AlertType.CONFIRMATION,"Customer Deleted").show();
+                    }
+                } catch (SQLException exception) {
+                    new Alert(Alert.AlertType.ERROR,exception.getMessage()).show();
+                }
+                int focusedIndex = CustomerTbl.getSelectionModel().getFocusedIndex();
+
+                observableList.remove(focusedIndex);
+                CustomerTbl.refresh();
             }
         });
     }
@@ -281,11 +283,10 @@ public class CustomerFormController {
     private void clearFields(){
         textCustomerID.setText("");
         textCustomerName.setText("");
-        txtAddress.setText("");
-        txtEmail.setText("");
-        txtContactNumber.setText("");
+        textCustomerAddress.setText("");
+        textCustomerEmail.setText("");
+        textCustomerNumber.setText("");
     }
-
 
     @FXML
     void dynamicSearchAction(KeyEvent event) {
@@ -301,9 +302,8 @@ public class CustomerFormController {
         }
     }
 
-
     private void mapCustomerTableVal(List<CustomerDTO> dtoList){
-        ObservableList<CustomerTM> observableList = FXCollections.observableArrayList();
+
 
         for (CustomerDTO customerDTO : dtoList){
             HBox hbox = new HBox();
@@ -319,7 +319,6 @@ public class CustomerFormController {
                             customerDTO.getEmail(),
                             customerDTO.getTelNum(),
                             hbox
-
                     )
             );
         }
@@ -372,5 +371,90 @@ public class CustomerFormController {
         // Set image as graphic content
         btn.setGraphic(imageView);
         return btn;
+    }
+
+    public void validateCusId(KeyEvent keyEvent) {
+        String id = textCustomerID.getText();
+        final boolean matches = Pattern.matches("[C][0-9]{3,}",id);
+
+        if (matches) {
+            textCustomerID.getParent().setStyle("-fx-border-color: green");
+        }else {
+            textCustomerID.getParent().setStyle("-fx-border-color: red");
+        }
+
+        if (keyEvent.getCode() == KeyCode.ENTER) {
+            if (matches){
+                textCustomerName.requestFocus();
+            }
+        }
+    }
+
+    public void validateCusName(KeyEvent keyEvent) {
+        String name = textCustomerName.getText();
+        final boolean matches = Pattern.matches("([A-Z a-z])+",name);
+
+        if (matches) {
+            textCustomerName.getParent().setStyle("-fx-border-color: green");
+        }else {
+            textCustomerName.getParent().setStyle("-fx-border-color: red");
+        }
+        if (keyEvent.getCode() == KeyCode.ENTER) {
+            if (matches){
+                textCustomerEmail.requestFocus();
+            }
+        }
+    }
+
+    public void validateCusEmail(KeyEvent keyEvent) {
+        String email = textCustomerEmail.getText();
+        final boolean matches = Pattern.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$",email);
+
+        if (matches) {
+            textCustomerEmail.getParent().setStyle("-fx-border-color: green");
+        }else {
+            textCustomerEmail.getParent().setStyle("-fx-border-color: red");
+        }
+        if (keyEvent.getCode() == KeyCode.ENTER) {
+            if (matches){
+                textCustomerAddress.requestFocus();
+            }
+        }
+    }
+
+    public void validateCusAddress(KeyEvent keyEvent) {
+        String address = textCustomerAddress.getText();
+        final boolean matches = Pattern.matches("[A-Za-z0-9 ,]+",address);
+
+        if (matches) {
+            textCustomerAddress.getParent().setStyle("-fx-border-color: green");
+        }else {
+            textCustomerAddress.getParent().setStyle("-fx-border-color: red");
+        }
+        if (keyEvent.getCode() == KeyCode.ENTER) {
+            if (matches){
+                textCustomerNumber.requestFocus();
+            }
+        }
+    }
+
+    public void validateCusNumber(KeyEvent keyEvent) {
+        String number = textCustomerNumber.getText();
+        final boolean matches = Pattern.matches("[0]\\d{9}",number);
+
+        if (matches) {
+            textCustomerNumber.getParent().setStyle("-fx-border-color: green");
+            customerAddBtn.setDisable(false);
+        }else {
+            textCustomerNumber.getParent().setStyle("-fx-border-color: red");
+            customerAddBtn.setDisable(true);
+        }
+        if (keyEvent.getCode() == KeyCode.ENTER) {
+            if (matches){
+                customerAddBtn.requestFocus();
+            }else {
+                customerAddBtn.setDisable(true);
+            }
+        }
     }
 }
