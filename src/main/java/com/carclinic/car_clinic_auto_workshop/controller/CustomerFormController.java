@@ -80,6 +80,7 @@ public class CustomerFormController {
         loadAllCustomers();
         customerAddBtn.setDisable(true);
         customerUpdateBtn.setDisable(true);
+        textCustomerID.requestFocus();
     }
 
     @FXML
@@ -455,6 +456,15 @@ public class CustomerFormController {
             }else {
                 customerAddBtn.setDisable(true);
             }
+        }
+    }
+
+    private void generateNextCustomerId() {
+        try {
+            String customerId = customerModel.generateNextCustomerId();
+            textCustomerID.setText(customerId);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
 }
