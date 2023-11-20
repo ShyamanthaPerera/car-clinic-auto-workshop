@@ -6,7 +6,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -24,12 +23,12 @@
                         <Image url="@images/Untitled-2.jpg" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="120.0" fitWidth="120.0" layoutX="69.0" layoutY="58.0" opacity="0.97" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="106.0" fitWidth="102.0" layoutX="78.0" layoutY="64.0" opacity="0.97" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/icons8-male-user-100.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="29.0" layoutY="316.0" opacity="0.49" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="29.0" layoutY="337.0" opacity="0.49" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/icons8-location-96.png" />
                      </image>
@@ -39,30 +38,46 @@
                         <Image url="@images/icons8-phone-100.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="29.0" layoutY="248.0" opacity="0.49" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="29.0" layoutY="279.0" opacity="0.49" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/icons8-id-96.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="29.0" layoutY="385.0" opacity="0.5">
+                  <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="29.0" layoutY="395.0" opacity="0.5">
                      <image>
                         <Image url="@images/icons8-email-96.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="lblName" alignment="CENTER" layoutX="35.0" layoutY="186.0" prefHeight="26.0" prefWidth="188.0" text="XXXXXXXXXXXXXXX">
+                  <Label fx:id="lblName" alignment="CENTER" layoutX="35.0" layoutY="186.0" prefHeight="26.0" prefWidth="188.0" text="XXXXXXXXXXX">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblId" layoutX="68.0" layoutY="281.0" prefHeight="26.0" prefWidth="179.0" text="XXXXXXXXXXXXXXX">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
                   </Label>
-                  <TextArea fx:id="lblId" layoutX="68.0" layoutY="248.0" prefHeight="49.0" prefWidth="180.0" style="-fx-background-color: #FFFFFF;" text="XXXXXXXXXXXXXXXXX" />
-                  <TextArea fx:id="lblAddress" layoutX="68.0" layoutY="316.0" prefHeight="49.0" prefWidth="180.0" style="-fx-background-color: #FFFFFF;" text="XXXXXXXXXXXXXXXXX" />
-                  <TextArea fx:id="lblEmail" layoutX="68.0" layoutY="385.0" prefHeight="49.0" prefWidth="180.0" style="-fx-background-color: #FFFFFF;" text="XXXXXXXXXXXXXXXXX" />
-                  <TextArea fx:id="lblTel" layoutX="68.0" layoutY="454.0" prefHeight="49.0" prefWidth="180.0" style="-fx-background-color: #FFFFFF;" text="XXXXXXXXXXXXXXXXX" />
+                  <Label fx:id="lblAddress" layoutX="68.0" layoutY="339.0" prefHeight="26.0" prefWidth="179.0" text="XXXXXXXXXXXXXXX">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblEmail" layoutX="68.0" layoutY="397.0" prefHeight="26.0" prefWidth="179.0" text="XXXXXXXXXXXXXXX">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblTel" layoutX="68.0" layoutY="456.0" prefHeight="26.0" prefWidth="179.0" text="XXXXXXXXXXXXXXX">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
             <AnchorPane layoutX="14.0" layoutY="15.0" prefHeight="194.0" prefWidth="778.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 10; -fx-border-radius: 10;">
                <children>
-                  <JFXButton fx:id="customerUpdateBtn" alignment="CENTER" buttonType="RAISED" layoutX="375.0" layoutY="155.0" onAction="#btnUpdateCustomerOnAction" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #a29bfe;" text="Update" textFill="WHITE">
+                  <JFXButton fx:id="customerUpdateBtn" alignment="CENTER" buttonType="RAISED" layoutX="351.0" layoutY="150.0" onAction="#btnUpdateCustomerOnAction" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #a29bfe;" text="Update" textFill="WHITE">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -77,15 +92,7 @@
                         </ImageView>
                      </graphic>
                   </JFXButton>
-                  <JFXButton buttonType="RAISED" layoutX="282.0" layoutY="155.0" onAction="#btnDeleteCustomerOnAction" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #a29bfe;" text="Remove" textFill="WHITE">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <font>
-                        <Font name="System Bold" size="10.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton fx:id="customerAddBtn" buttonType="RAISED" layoutX="188.0" layoutY="155.0" onAction="#btnAddCustomerOnAction" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #a29bfe;" text="Add" textFill="WHITE">
+                  <JFXButton fx:id="customerAddBtn" buttonType="RAISED" layoutX="254.0" layoutY="150.0" onAction="#btnAddCustomerOnAction" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #a29bfe;" text="Add" textFill="WHITE">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -100,7 +107,7 @@
                         </ImageView>
                      </graphic>
                   </JFXButton>
-                  <JFXButton buttonType="RAISED" layoutX="469.0" layoutY="155.0" onAction="#btnClearOnAction" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #a29bfe;" text="Clear" textFill="WHITE">
+                  <JFXButton buttonType="RAISED" layoutX="445.0" layoutY="150.0" onAction="#btnClearOnAction" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #a29bfe;" text="Clear" textFill="WHITE">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -117,32 +124,32 @@
                   </JFXButton>
                   <AnchorPane layoutX="58.0" layoutY="29.0" prefHeight="37.0" prefWidth="200.0" style="-fx-border-color: #3498db; -fx-border-radius: 10; -fx-background-radius: 10;">
                      <children>
-                        <Label layoutX="10.0" layoutY="-10.0" style="-fx-background-color: #FFFFFF;" text=" Customer ID " />
-                        <TextField fx:id="textCustomerID" layoutX="9.0" layoutY="7.0" onKeyReleased="#validateCusId" prefHeight="31.0" prefWidth="188.0" promptText="C001" style="-fx-background-color: #FFFFFF;" />
+                        <Label layoutX="10.0" layoutY="-10.0" style="-fx-background-color: #FFFFFF;" text=" Customer ID * " />
+                        <TextField fx:id="textCustomerID" disable="true" editable="false" layoutX="9.0" layoutY="7.0" prefHeight="31.0" prefWidth="188.0" style="-fx-background-color: #FFFFFF;" />
                      </children>
                   </AnchorPane>
                   <AnchorPane layoutX="311.0" layoutY="29.0" prefHeight="37.0" prefWidth="200.0" style="-fx-border-color: #3498db; -fx-border-radius: 10; -fx-background-radius: 10;">
                      <children>
-                        <Label layoutX="10.0" layoutY="-10.0" style="-fx-background-color: #FFFFFF;" text=" Customer Name " />
-                        <TextField fx:id="textCustomerName" layoutX="9.0" layoutY="7.0" onKeyReleased="#validateCusName" prefHeight="31.0" prefWidth="188.0" promptText="Thomas Shelby" style="-fx-background-color: #FFFFFF;" />
+                        <Label layoutX="10.0" layoutY="-10.0" style="-fx-background-color: #FFFFFF;" text=" Customer Name * " />
+                        <TextField fx:id="textCustomerName" layoutX="9.0" layoutY="7.0" onKeyReleased="#validateCusForm" prefHeight="31.0" prefWidth="188.0" style="-fx-background-color: #FFFFFF;" />
                      </children>
                   </AnchorPane>
                   <AnchorPane layoutX="549.0" layoutY="29.0" prefHeight="37.0" prefWidth="200.0" style="-fx-border-color: #3498db; -fx-border-radius: 10; -fx-background-radius: 10;">
                      <children>
-                        <Label layoutX="10.0" layoutY="-10.0" style="-fx-background-color: #FFFFFF;" text=" Email " />
-                        <TextField fx:id="textCustomerEmail" layoutX="9.0" layoutY="7.0" onKeyReleased="#validateCusEmail" prefHeight="31.0" prefWidth="188.0" promptText="thomasshelby123@gmail.com" style="-fx-background-color: #FFFFFF;" />
+                        <Label layoutX="10.0" layoutY="-10.0" style="-fx-background-color: #FFFFFF;" text=" Email * " />
+                        <TextField fx:id="textCustomerEmail34" layoutX="6.0" layoutY="8.0" onKeyReleased="#validateCusForm" prefHeight="31.0" prefWidth="188.0" style="-fx-background-color: #FFFFFF;" />
                      </children>
                   </AnchorPane>
                   <AnchorPane layoutX="58.0" layoutY="98.0" prefHeight="37.0" prefWidth="200.0" style="-fx-border-color: #3498db; -fx-border-radius: 10; -fx-background-radius: 10;">
                      <children>
-                        <Label layoutX="10.0" layoutY="-10.0" style="-fx-background-color: #FFFFFF;" text=" Address " />
-                        <TextField fx:id="textCustomerAddress" layoutX="9.0" layoutY="7.0" onKeyReleased="#validateCusAddress" prefHeight="31.0" prefWidth="188.0" promptText="95/B,Birmingham,England" style="-fx-background-color: #FFFFFF;" />
+                        <Label layoutX="10.0" layoutY="-10.0" style="-fx-background-color: #FFFFFF;" text=" Address * " />
+                        <TextField fx:id="textCustomerAddress" layoutX="9.0" layoutY="7.0" onKeyReleased="#validateCusForm" prefHeight="31.0" prefWidth="188.0" style="-fx-background-color: #FFFFFF;" />
                      </children>
                   </AnchorPane>
                   <AnchorPane layoutX="311.0" layoutY="98.0" prefHeight="37.0" prefWidth="200.0" style="-fx-border-color: #3498db; -fx-border-radius: 10; -fx-background-radius: 10;">
                      <children>
-                        <Label layoutX="10.0" layoutY="-10.0" style="-fx-background-color: #FFFFFF;" text=" Contact Number " />
-                        <TextField fx:id="textCustomerNumber" layoutX="9.0" layoutY="7.0" onKeyReleased="#validateCusNumber" prefHeight="31.0" prefWidth="188.0" promptText="0717085277" style="-fx-background-color: #FFFFFF;" />
+                        <Label layoutX="10.0" layoutY="-10.0" style="-fx-background-color: #FFFFFF;" text=" Contact Number * " />
+                        <TextField fx:id="textCustomerNumber" layoutX="9.0" layoutY="7.0" onKeyReleased="#validateCusForm" prefHeight="31.0" prefWidth="188.0" style="-fx-background-color: #FFFFFF;" />
                      </children>
                   </AnchorPane>
                </children>
