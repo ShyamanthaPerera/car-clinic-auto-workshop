@@ -1,6 +1,7 @@
 package com.carclinic.car_clinic_auto_workshop.model;
 
 import com.carclinic.car_clinic_auto_workshop.db.DbConnection;
+import com.carclinic.car_clinic_auto_workshop.dto.CustomerDTO;
 import com.carclinic.car_clinic_auto_workshop.dto.EmployeeDTO;
 
 import java.sql.Connection;
@@ -24,6 +25,10 @@ public class EmployeeModel {
         statement.setString(3, dto.getAddress());
         statement.setString(4, dto.getTelNum());
         statement.setString(5, dto.getDesignation());
+        statement.setString(6, "system");
+        statement.setDate(7, new java.sql.Date(new java.util.Date().getTime()));
+        statement.setString(8, null);
+        statement.setString(9, null);
 
         return statement.executeUpdate() > 0;
     }
@@ -46,7 +51,6 @@ public class EmployeeModel {
 
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement statement = connection.prepareStatement(DELETE_EMPLOYEE);
-
         statement.setString(1, id);
 
         return statement.executeUpdate() > 0;
@@ -56,9 +60,7 @@ public class EmployeeModel {
 
         Connection connection = DbConnection.getInstance().getConnection ();
         PreparedStatement statement = connection.prepareStatement(SEARCH_EMPLOYEE);
-
         statement.setString(1, id);
-
         ResultSet resultSet = statement.executeQuery();
 
         EmployeeDTO dto = null;
@@ -75,7 +77,31 @@ public class EmployeeModel {
         return dto;
     }
 
+    public List<EmployeeDTO> getAllEmployeeBySearch(String searchVal) throws SQLException {
 
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement statement = connection.prepareStatement(LOAD_ALL_EMPLOYEE_BY_SEARCH_VAL);
+
+        for (int i = 1; i <= 5; i++) {
+            statement.setString(i, "%" + searchVal + "%");
+        }
+
+        ResultSet resultSet = statement.executeQuery();
+        ArrayList<EmployeeDTO> employeeDtoList = new ArrayList<>();
+
+        while(resultSet.next()) {
+            employeeDtoList.add(
+                    new EmployeeDTO(
+                            resultSet.getString(1),
+                            resultSet.getString(2),
+                            resultSet.getString(3),
+                            resultSet.getString(4),
+                            resultSet.getString(5)
+                    )
+            );
+        }
+        return employeeDtoList;
+    }
 
     public List<EmployeeDTO> getAllEmployee() throws SQLException {
 
@@ -99,7 +125,27 @@ public class EmployeeModel {
         return EmployeeDtoList;
     }
 
+    public String generateNextCustomerId() throws SQLException {
 
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(GET_LAST_EMPLOYEE_ID);
 
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if(resultSet.next()) {
+            return splitEmployeeId(resultSet.getString(1));
+        }
+        return splitEmployeeId(null);
+    }
 
+    private String splitEmployeeId(String currentEmployeeId) {
+        if(currentEmployeeId != null) {
+            String[] split = currentEmployeeId.split("E0");
+
+            int id = Integer.parseInt(split[1]); //01
+            id++;
+            return "E00" + id;
+        } else {
+            return "E001";
+        }
+    }
 }

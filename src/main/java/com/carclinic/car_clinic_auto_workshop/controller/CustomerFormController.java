@@ -81,38 +81,20 @@ public class CustomerFormController {
         String cusEmail = textCustomerEmail34.getText();
         String cusTel = textCustomerNumber.getText();
 
-        if (validateInput(cusId, cusName, cusAddress, cusTel)) {
-            CustomerDTO dto = new CustomerDTO(cusId, cusName, cusAddress, cusEmail, cusTel);
+        CustomerDTO dto = new CustomerDTO(cusId, cusName, cusAddress, cusEmail, cusTel);
 
-            try {
-                boolean isSaved = customerModel.saveCustomer(dto);
+        try {
+            boolean isSaved = customerModel.saveCustomer(dto);
 
-                if (isSaved) {
-                    new Alert(Alert.AlertType.CONFIRMATION, "Customer Saved").show();
-                    clearFields();
-                }
-            } catch (SQLException e) {
-                new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-                e.printStackTrace();
+            if (isSaved) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Customer Saved").show();
+                customerclearFields();
             }
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+            e.printStackTrace();
         }
     }
-
-    public boolean validateInput(String cusId, String cusName, String cusAddress, String cusTel) {
-
-        if (cusName.trim().isEmpty()) {
-
-            new Alert(Alert.AlertType.WARNING, "Customer name cannot be null").show();
-            return false;
-        }
-
-        if (cusTel.trim().isEmpty()) {
-            new Alert(Alert.AlertType.WARNING, "Customer contact number cannot be null").show();
-            return false;
-        }
-        return true;
-    }
-
 
     @FXML
     void btnUpdateCustomerOnAction(ActionEvent event) {
@@ -130,24 +112,7 @@ public class CustomerFormController {
 
             if (isUpdate) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Customer Updated").show();
-                clearFields();
-            }
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        }
-    }
-
-    @FXML
-    void btnDeleteCustomerOnAction(ActionEvent event) {
-
-        String id = textCustomerID.getText();
-
-        try {
-            boolean isDelete = customerModel.deleteCustomer(id);
-
-            if (isDelete) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Customer Deleted").show();
-                clearFields();
+                customerclearFields();
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
@@ -213,7 +178,6 @@ public class CustomerFormController {
         });
     }
 
-
     public void loadAllCustomers() {
         try {
             List<CustomerDTO> dtoList = customerModel.getAllCustomer();
@@ -224,15 +188,16 @@ public class CustomerFormController {
     }
 
     @FXML
-    void btnClearOnAction(ActionEvent event) {
-        clearFields();
+    void btnCustomerClearOnAction(ActionEvent event) {
+        customerclearFields();
     }
 
-    private void clearFields() {
+    private void customerclearFields() {
         textCustomerID.setText("");
         textCustomerName.setText("");
         textCustomerAddress.setText("");
         textCustomerEmail34.setText("");
+
         textCustomerNumber.setText("");
 
         customerAddBtn.setDisable(true);
@@ -244,7 +209,7 @@ public class CustomerFormController {
     }
 
     @FXML
-    void dynamicSearchAction(KeyEvent event) {
+    private void dynamicSearchAction(KeyEvent event) {
         if (!txtdynamicSearch.getText().trim().isEmpty()) {
             try {
                 List<CustomerDTO> dtoList = customerModel.getAllCustomerBySearch(txtdynamicSearch.getText());

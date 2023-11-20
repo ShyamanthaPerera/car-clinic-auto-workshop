@@ -127,10 +127,9 @@ public class CustomerModel {
     }
 
     public String generateNextCustomerId() throws SQLException {
-        Connection connection = DbConnection.getInstance().getConnection();
 
-        String sql = "SELECT cus_id FROM customer ORDER BY cus_id DESC LIMIT 1";
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(GET_LAST_CUSTOMER_ID);
 
         ResultSet resultSet = preparedStatement.executeQuery();
         if(resultSet.next()) {

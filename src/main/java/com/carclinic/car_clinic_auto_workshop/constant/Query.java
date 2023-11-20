@@ -21,6 +21,7 @@ public class Query {
     public static final String SEARCH_CUSTOMER = "SELECT * FROM customer WHERE cus_id = ?";
     public static final String LOAD_ALL_CUSTOMER =  "SELECT * FROM customer";
     public static final String LOAD_ALL_CUSTOMER_BY_SEARCH_VAL =  "SELECT * FROM customer WHERE cus_id LIKE ? OR cus_name LIKE ? OR address LIKE ? OR email LIKE ? OR tel_num LIKE ?";
+    public static final String GET_LAST_CUSTOMER_ID = "SELECT cus_id FROM customer ORDER BY cus_id DESC LIMIT 1";
 
 
     /**
@@ -36,11 +37,13 @@ public class Query {
     /**
      * Employee
      */
-    public static final String SAVE_EMPLOYEE = "INSERT INTO employee VALUES(?, ?, ?, ?, ?)";
+    public static final String SAVE_EMPLOYEE = "INSERT INTO employee VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
     public static final String UPDATE_EMPLOYEE = "UPDATE employee SET name = ?, address = ?, tel_num = ?, designation = ? WHERE emp_id = ?";
     public static final String DELETE_EMPLOYEE = "DELETE FROM employee WHERE emp_id = ?";
     public static final String SEARCH_EMPLOYEE = "SELECT * FROM employee WHERE emp_id = ?";
     public static final String LOAD_ALL_EMPLOYEE =  "SELECT * FROM employee";
+    public static final String LOAD_ALL_EMPLOYEE_BY_SEARCH_VAL =  "SELECT * FROM employee WHERE emp_id LIKE ? OR name LIKE ? OR address LIKE ? OR tel_num LIKE ? OR designation LIKE ?";
+    public static final String GET_LAST_EMPLOYEE_ID = "SELECT emp_id FROM employee ORDER BY emp_id DESC LIMIT 1";
 
 
     /**
