@@ -89,11 +89,13 @@ public class Query {
     /**
      * Supplier
      */
-    public static final String SAVE_SUPPLIER = "INSERT INTO supplier VALUES(?, ?, ?, ?)";
+    public static final String SAVE_SUPPLIER = "INSERT INTO supplier VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
     public static final String UPDATE_SUPPLIER = "UPDATE supplier SET name = ?, address = ?, tel_num = ? WHERE sup_id = ?";
     public static final String DELETE_SUPPLIER = "DELETE FROM supplier WHERE sup_id = ?";
     public static final String SEARCH_SUPPLIER = "SELECT * FROM supplier WHERE sup_id = ?";
     public static final String LOAD_ALL_SUPPLIER =  "SELECT * FROM supplier";
+    public static final String LOAD_ALL_SUPPLIER_BY_SEARCH_VAL =  "SELECT * FROM supplier WHERE sup_id LIKE ? OR name LIKE ? OR address LIKE ? OR tel_num LIKE ?";
+    public static final String GET_LAST_SUPPLIER_ID = "SELECT sup_id FROM supplier ORDER BY sup_id DESC LIMIT 1";
 
 
     /**
