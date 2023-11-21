@@ -49,11 +49,13 @@ public class Query {
     /**
      * Item
      */
-    public static final String SAVE_ITEM = "INSERT INTO item VALUES(?, ?, ?, ?, ?)";
+    public static final String SAVE_ITEM = "INSERT INTO item VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
     public static final String UPDATE_ITEM = "UPDATE item SET model = ?, description = ?, unit_price = ?, qty_on_hand = ? WHERE item_id = ?";
     public static final String DELETE_ITEM = "DELETE FROM item WHERE item_id = ?";
     public static final String SEARCH_ITEM = "SELECT * FROM item WHERE item_id = ?";
     public static final String LOAD_ALL_ITEM =  "SELECT * FROM item";
+    public static final String LOAD_ALL_ITEMS_BY_SEARCH_VAL =  "SELECT * FROM item WHERE item_id LIKE ? OR model LIKE ? OR description LIKE ? OR unit_price LIKE ? OR qty_on_hand LIKE ?";
+    public static final String GET_LAST_ITEM_ID = "SELECT item_id FROM item ORDER BY item_id DESC LIMIT 1";
 
 
     /**

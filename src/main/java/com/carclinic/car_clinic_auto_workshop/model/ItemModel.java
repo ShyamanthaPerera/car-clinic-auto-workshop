@@ -1,6 +1,7 @@
 package com.carclinic.car_clinic_auto_workshop.model;
 
 import com.carclinic.car_clinic_auto_workshop.db.DbConnection;
+import com.carclinic.car_clinic_auto_workshop.dto.CustomerDTO;
 import com.carclinic.car_clinic_auto_workshop.dto.ItemDTO;
 
 import java.sql.Connection;
@@ -24,6 +25,10 @@ public class ItemModel {
         statement.setString(3, dto.getDescription());
         statement.setDouble(4, dto.getUnitPrice());
         statement.setInt(5, dto.getQtyOnHand());
+        statement.setString(6, "system");
+        statement.setDate(7,new java.sql.Date(new java.util.Date().getTime()));
+        statement.setString(8,null);
+        statement.setString(9,null);
 
         return statement.executeUpdate() > 0;
     }
@@ -95,5 +100,56 @@ public class ItemModel {
             );
         }
         return ItemDtoList;
+    }
+
+    public List<ItemDTO> getAllItemsBySearch(String searchVal) throws SQLException {
+
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement statement = connection.prepareStatement(LOAD_ALL_ITEMS_BY_SEARCH_VAL);
+
+        for (int i = 1; i <= 5; i++) {
+            statement.setString(i, "%" + searchVal + "%");
+        }
+
+        ResultSet resultSet = statement.executeQuery();
+
+        ArrayList<ItemDTO> itemDtoList = new ArrayList<>();
+
+        while(resultSet.next()) {
+            itemDtoList.add(
+                    new ItemDTO(
+                            resultSet.getString(1),
+                            resultSet.getString(2),
+                            resultSet.getString(3),
+                            resultSet.getDouble(4),
+                            resultSet.getInt(5)
+                    )
+            );
+        }
+        return itemDtoList;
+    }
+
+    public String generateNextItemsId() throws SQLException {
+
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(GET_LAST_ITEM_ID);
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if(resultSet.next()) {
+            return splitItemId(resultSet.getString(1));
+        }
+        return splitItemId(null);
+    }
+
+    private String splitItemId(String currentItemId) {
+        if(currentItemId != null) {
+            String[] split = currentItemId.split("I0");
+
+            int id = Integer.parseInt(split[1]); //01
+            id++;
+            return "I00" + id;
+        } else {
+            return "I001";
+        }
     }
 }

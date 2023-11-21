@@ -17,7 +17,8 @@ public class Launcher extends Application {
 
 //        stage.setScene(new Scene(FXMLLoader.load(this.getClass().getResource("/view/CustomerForm.fxml"))));
 //        stage.setScene(new Scene(FXMLLoader.load(this.getClass().getResource("/view/EmployeeForm.fxml"))));
-        stage.setScene(new Scene(FXMLLoader.load(this.getClass().getResource("/view/SupplierForm.fxml"))));
+//        stage.setScene(new Scene(FXMLLoader.load(this.getClass().getResource("/view/SupplierForm.fxml"))));
+        stage.setScene(new Scene(FXMLLoader.load(this.getClass().getResource("/view/ItemForm.fxml"))));
         stage.centerOnScreen();
         stage.setTitle("Customer");
         stage.show();
