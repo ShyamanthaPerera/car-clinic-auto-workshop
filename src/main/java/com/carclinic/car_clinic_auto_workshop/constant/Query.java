@@ -113,11 +113,12 @@ public class Query {
     /**
      * User
      */
-    public static final String SAVE_USER = "INSERT INTO user VALUES(?, ?, ?, ?, ?)";
+    public static final String SAVE_USER = "INSERT INTO user VALUES(?, ?, ?, ?, ?, ?, ?)";
     public static final String UPDATE_USER = "UPDATE user SET password = ?, name = ? WHERE user_name = ?";
     public static final String DELETE_USER = "DELETE FROM user WHERE user_name = ?";
     public static final String SEARCH_USER = "SELECT * FROM user WHERE user_name = ?";
     public static final String LOAD_ALL_USER = "SELECT * FROM user";
+    public static final String LOAD_ALL_USER_BY_SEARCH_VAL =  "SELECT * FROM user WHERE user_name LIKE ? OR password LIKE ? OR name LIKE ?";
 
 
     /**

@@ -1,6 +1,7 @@
 package com.carclinic.car_clinic_auto_workshop.model;
 
 import com.carclinic.car_clinic_auto_workshop.db.DbConnection;
+import com.carclinic.car_clinic_auto_workshop.dto.CustomerDTO;
 import com.carclinic.car_clinic_auto_workshop.dto.UserDTO;
 
 import java.sql.Connection;
@@ -22,6 +23,10 @@ public class UserModel {
         statement.setString(1, dto.getUserName());
         statement.setString(2, dto.getPassword());
         statement.setString(3, dto.getName());
+        statement.setString(4, "system");
+        statement.setDate(5,new java.sql.Date(new java.util.Date().getTime()));
+        statement.setString(6,null);
+        statement.setString(7,null);
 
         return statement.executeUpdate() > 0;
     }
@@ -91,6 +96,30 @@ public class UserModel {
         return UserDtoList;
     }
 
+    public List<UserDTO> getAllCustomerBySearch(String searchVal) throws SQLException {
+
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement statement = connection.prepareStatement(LOAD_ALL_USER_BY_SEARCH_VAL);
+
+        for (int i = 1; i <= 5; i++) {
+            statement.setString(i, "%" + searchVal + "%");
+        }
+
+        ResultSet resultSet = statement.executeQuery();
+
+        ArrayList<UserDTO> userDtoList = new ArrayList<>();
+
+        while(resultSet.next()) {
+            userDtoList.add(
+                    new UserDTO(
+                            resultSet.getString(1),
+                            resultSet.getString(2),
+                            resultSet.getString(3)
+                    )
+            );
+        }
+        return userDtoList;
+    }
 
 
 
