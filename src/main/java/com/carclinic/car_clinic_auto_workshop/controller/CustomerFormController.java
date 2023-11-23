@@ -1,5 +1,6 @@
 package com.carclinic.car_clinic_auto_workshop.controller;
 
+import com.carclinic.car_clinic_auto_workshop.db.DbConnection;
 import com.carclinic.car_clinic_auto_workshop.dto.CustomerDTO;
 import com.carclinic.car_clinic_auto_workshop.dto.tm.CustomerTM;
 import com.carclinic.car_clinic_auto_workshop.model.CustomerModel;
@@ -18,7 +19,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
+import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
@@ -345,5 +351,26 @@ public class CustomerFormController {
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
+    }
+
+    public void btnPrintCustomerOnAction(ActionEvent actionEvent) throws JRException, SQLException {
+
+//        InputStream resourceAsStream = getClass().getResourceAsStream("reports/CarClinicCustomers.jrxml");
+//        JasperDesign load = JRXmlLoader.load(resourceAsStream);
+//        JasperReport jasperReport = JasperCompileManager.compileReport(load);
+//
+//        JasperPrint jasperPrint = JasperFillManager.fillReport(
+//                jasperReport,
+//                null,
+//                DbConnection.getInstance().getConnection()
+//        );
+//        JasperViewer.viewReport(jasperPrint, false);
+
+        InputStream inputStream = getClass().getResourceAsStream("reports/CarClinicCustomers.jrxml");
+        JasperDesign load = JRXmlLoader.load(inputStream);
+        JasperReport jasperReport = JasperCompileManager.compileReport(load);
+
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, DbConnection.getInstance().getConnection());
+        JasperViewer.viewReport(jasperPrint,false);
     }
 }

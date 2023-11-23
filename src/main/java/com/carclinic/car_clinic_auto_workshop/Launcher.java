@@ -15,13 +15,10 @@ public class Launcher extends Application {
 
     public void start(Stage stage) throws IOException {
 
-//        stage.setScene(new Scene(FXMLLoader.load(this.getClass().getResource("/view/CustomerForm.fxml"))));
-//        stage.setScene(new Scene(FXMLLoader.load(this.getClass().getResource("/view/EmployeeForm.fxml"))));
-//        stage.setScene(new Scene(FXMLLoader.load(this.getClass().getResource("/view/SupplierForm.fxml"))));
-//        stage.setScene(new Scene(FXMLLoader.load(this.getClass().getResource("/view/ItemForm.fxml"))));
-        stage.setScene(new Scene(FXMLLoader.load(this.getClass().getResource("/view/UserForm.fxml"))));
+        stage.setScene(new Scene(FXMLLoader.load(this.getClass().getResource("/view/DashboardForm.fxml"))));
         stage.centerOnScreen();
-        stage.setTitle("Customer");
+        stage.setTitle("Car Clinic Auto Workshop");
         stage.show();
+        stage.getIcons().add(new javafx.scene.image.Image("view/images/icons8-car-repair-64.png"));
     }
 }

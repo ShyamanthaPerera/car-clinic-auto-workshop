@@ -128,8 +128,8 @@
                             <columns>
                                 <TableColumn fx:id="usernameCol" prefWidth="202.0" text="Username" />
                                 <TableColumn fx:id="passwordCol" prefWidth="188.0" text="Password" />
-                                <TableColumn fx:id="nameCol" prefWidth="190.0" text="Name" />
-                                <TableColumn fx:id="actionCol" prefWidth="176.0" text="Action" />
+                                <TableColumn fx:id="nameCol" prefWidth="248.0" text="Name" />
+                                <TableColumn fx:id="actionCol" prefWidth="118.0" text="Action" />
                             </columns>
                         </TableView>
                         <JFXTextField fx:id="txtdynamicSearch" labelFloat="true" layoutX="251.0" layoutY="22.0" onKeyReleased="#dynamicSearchAction" prefHeight="31.0" prefWidth="277.0" promptText="Dynamic Search" />

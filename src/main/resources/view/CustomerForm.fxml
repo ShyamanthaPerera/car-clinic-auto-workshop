@@ -167,6 +167,21 @@
                      </columns>
                   </TableView>
                   <JFXTextField fx:id="txtdynamicSearch" labelFloat="true" layoutX="251.0" layoutY="22.0" onKeyReleased="#dynamicSearchAction" prefHeight="31.0" prefWidth="277.0" promptText="Dynamic Search" />
+                  <JFXButton buttonType="RAISED" layoutX="628.0" layoutY="23.0" onAction="#btnPrintCustomerOnAction" prefHeight="30.0" prefWidth="136.0" style="-fx-background-color: #a29bfe;" text="Print Customer List" textFill="WHITE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <font>
+                        <Font name="System Bold" size="10.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/customer_list.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
                </children>
             </AnchorPane>
          </children>
