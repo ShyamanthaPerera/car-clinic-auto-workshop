@@ -19,6 +19,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
@@ -34,6 +35,7 @@ public class CustomerFormController {
 
     public TableColumn emailCol;
     public Label lblName;
+
     public Label lblId;
     public Label lblAddress;
     public Label lblEmail;
@@ -67,6 +69,9 @@ public class CustomerFormController {
     private TableColumn<?, ?> contactCol;
     @FXML
     private TableColumn<?, ?> actionCol;
+    public Stage stage;
+
+    public VehicleFormController vehicleFormController;
 
     public void initialize() {
         setCellValueFactory();
@@ -184,6 +189,15 @@ public class CustomerFormController {
         });
     }
 
+    private void setSelectBtnAction(Button btn, CustomerDTO customerDTO) {
+        btn.setOnAction((e) -> {
+            if(vehicleFormController!=null){
+            vehicleFormController.getData(customerDTO);
+            stage.hide();
+        }
+        });
+    }
+
     public void loadAllCustomers() {
         try {
             List<CustomerDTO> dtoList = customerModel.getAllCustomer();
@@ -235,7 +249,11 @@ public class CustomerFormController {
         for (CustomerDTO customerDTO : dtoList) {
             HBox hbox = new HBox();
             hbox.setSpacing(10);
-            hbox.getChildren().addAll(createViewButton(customerDTO), createUpdateButton(customerDTO), createDeleteButton(customerDTO));
+            if(vehicleFormController==null) {
+                hbox.getChildren().addAll(createViewButton(customerDTO), createUpdateButton(customerDTO), createDeleteButton(customerDTO));
+            }else{
+                hbox.getChildren().addAll(createViewButton(customerDTO), createUpdateButton(customerDTO), createDeleteButton(customerDTO), createSelectButton(customerDTO));
+            }
 
             observableList.add(
                     new CustomerTM(
@@ -288,6 +306,21 @@ public class CustomerFormController {
         btn.setStyle("-fx-background-color: #ff4d4d;");
 
         Image image = new Image(getClass().getResourceAsStream("/view/images/icons8-delete-90.png"));
+        ImageView imageView = new ImageView(image);
+        imageView.setFitWidth(16);
+        imageView.setFitHeight(16);
+
+        btn.setGraphic(imageView);
+        return btn;
+    }
+
+    private JFXButton createSelectButton(CustomerDTO customerDTO) {
+        JFXButton btn = new JFXButton();
+        setSelectBtnAction(btn, customerDTO);
+        btn.setCursor(Cursor.HAND);
+        btn.setStyle("-fx-background-color: #ff4d4d;");
+
+        Image image = new Image(getClass().getResourceAsStream("/view/images/icons8-select-90.png"));
         ImageView imageView = new ImageView(image);
         imageView.setFitWidth(16);
         imageView.setFitHeight(16);
@@ -355,22 +388,17 @@ public class CustomerFormController {
 
     public void btnPrintCustomerOnAction(ActionEvent actionEvent) throws JRException, SQLException {
 
-//        InputStream resourceAsStream = getClass().getResourceAsStream("reports/CarClinicCustomers.jrxml");
-//        JasperDesign load = JRXmlLoader.load(resourceAsStream);
-//        JasperReport jasperReport = JasperCompileManager.compileReport(load);
-//
-//        JasperPrint jasperPrint = JasperFillManager.fillReport(
-//                jasperReport,
-//                null,
-//                DbConnection.getInstance().getConnection()
-//        );
-//        JasperViewer.viewReport(jasperPrint, false);
-
-        InputStream inputStream = getClass().getResourceAsStream("reports/CarClinicCustomers.jrxml");
+        InputStream inputStream = getClass().getResourceAsStream("../reports/CarClinicCustomers.jrxml");
         JasperDesign load = JRXmlLoader.load(inputStream);
         JasperReport jasperReport = JasperCompileManager.compileReport(load);
 
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, DbConnection.getInstance().getConnection());
         JasperViewer.viewReport(jasperPrint,false);
+    }
+
+    public void setScene(Stage stage, VehicleFormController vehicleFormController) {
+        this.vehicleFormController = vehicleFormController;
+        this.stage = stage;
+        loadAllCustomers();
     }
 }
