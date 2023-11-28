@@ -124,11 +124,12 @@ public class Query {
     /**
      * Vehicle
      */
-    public static final String SAVE_VEHICLE = "INSERT INTO vehicle VALUES(?, ?, ?, ?, ?)";
+    public static final String SAVE_VEHICLE = "INSERT INTO vehicle VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
     public static final String UPDATE_VEHICLE = "UPDATE vehicle SET cus_id = ?, vcl_ctgry = ?, manufacturer = ?, model = ? WHERE vcl_id = ?";
     public static final String DELETE_VEHICLE = "DELETE FROM vehicle WHERE vcl_id = ?";
     public static final String SEARCH_VEHICLE = "SELECT * FROM vehicle WHERE vcl_id = ?";
     public static final String LOAD_ALL_VEHICLE = "SELECT * FROM vehicle";
+    public static final String GET_LAST_VEHICLE_ID = "SELECT vcl_id FROM vehicle ORDER BY vcl_id DESC LIMIT 1";
 
 }
 

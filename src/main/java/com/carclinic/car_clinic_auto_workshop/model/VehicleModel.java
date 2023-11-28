@@ -24,6 +24,10 @@ public class VehicleModel {
         statement.setString(3, dto.getVclCategory());
         statement.setString(4, dto.getManufacturer());
         statement.setString(5, dto.getModel());
+        statement.setString(6, "system");
+        statement.setDate(7,new java.sql.Date(new java.util.Date().getTime()));
+        statement.setString(8,null);
+        statement.setString(9,null);
 
         return statement.executeUpdate() > 0;
     }
@@ -99,6 +103,29 @@ public class VehicleModel {
         return VehicleDtoList;
     }
 
+    public String generateNextVehicleId() throws SQLException {
+
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(GET_LAST_VEHICLE_ID);
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if(resultSet.next()) {
+            return splitVehicleId(resultSet.getString(1));
+        }
+        return splitVehicleId(null);
+    }
+
+    private String splitVehicleId(String currentVehicleId) {
+        if(currentVehicleId != null) {
+            String[] split = currentVehicleId.split("V0");
+
+            int id = Integer.parseInt(split[1]); //01
+            id++;
+            return "V00" + id;
+        } else {
+            return "V001";
+        }
+    }
 
 
 
