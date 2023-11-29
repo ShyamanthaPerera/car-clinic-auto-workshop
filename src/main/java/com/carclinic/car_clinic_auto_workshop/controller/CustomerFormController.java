@@ -194,17 +194,8 @@ public class CustomerFormController {
             if(vehicleFormController!=null){
             vehicleFormController.getData(customerDTO);
             stage.hide();
-        }
+            }
         });
-    }
-
-    public void loadAllCustomers() {
-        try {
-            List<CustomerDTO> dtoList = customerModel.getAllCustomer();
-            mapCustomerTableVal(dtoList);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     @FXML
@@ -217,7 +208,6 @@ public class CustomerFormController {
         textCustomerName.setText("");
         textCustomerAddress.setText("");
         textCustomerEmail34.setText("");
-
         textCustomerNumber.setText("");
 
         customerAddBtn.setDisable(true);
@@ -239,6 +229,15 @@ public class CustomerFormController {
             }
         } else {
             loadAllCustomers();
+        }
+    }
+
+    public void loadAllCustomers() {
+        try {
+            List<CustomerDTO> dtoList = customerModel.getAllCustomer();
+            mapCustomerTableVal(dtoList);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 

@@ -15,4 +15,13 @@ public class VehicleDTO {
     private String vclCategory;
     private String manufacturer;
     private String model;
+    private String cusName;
+
+    public VehicleDTO(String vclId, String cusId, String vclCategory, String manufacturer, String model) {
+        this.vclId = vclId;
+        this.cusId = cusId;
+        this.vclCategory = vclCategory;
+        this.manufacturer = manufacturer;
+        this.model = model;
+    }
 }

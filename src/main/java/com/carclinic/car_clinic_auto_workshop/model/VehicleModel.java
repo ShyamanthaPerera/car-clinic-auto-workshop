@@ -1,6 +1,7 @@
 package com.carclinic.car_clinic_auto_workshop.model;
 
 import com.carclinic.car_clinic_auto_workshop.db.DbConnection;
+import com.carclinic.car_clinic_auto_workshop.dto.CustomerDTO;
 import com.carclinic.car_clinic_auto_workshop.dto.VehicleDTO;
 
 import java.sql.Connection;
@@ -70,9 +71,9 @@ public class VehicleModel {
         if(resultSet.next()) {
             String vcl_id = resultSet.getString(1);
             String cus_id = resultSet.getString(2);
-            String category = resultSet.getString(3);
-            String manufacturer = resultSet.getString(4);
-            String model = resultSet.getString(5);
+            String category = resultSet.getString(4);
+            String manufacturer = resultSet.getString(5);
+            String model = resultSet.getString(6);
 
             dto = new VehicleDTO(vcl_id, cus_id, category, manufacturer, model);
         }
@@ -96,11 +97,39 @@ public class VehicleModel {
                             resultSet.getString(2),
                             resultSet.getString(3),
                             resultSet.getString(4),
-                            resultSet.getString(5)
+                            resultSet.getString(5),
+                            resultSet.getString(11)
                     )
             );
         }
         return VehicleDtoList;
+    }
+
+    public List<VehicleDTO> getAllVehicleBySearch(String searchVal) throws SQLException {
+
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement statement = connection.prepareStatement(LOAD_ALL_VEHICLE_BY_SEARCH_VAL);
+
+        for (int i = 1; i <= 5; i++) {
+            statement.setString(i, "%" + searchVal + "%");
+        }
+
+        ResultSet resultSet = statement.executeQuery();
+
+        ArrayList<VehicleDTO> vehicleDtoList = new ArrayList<>();
+
+        while(resultSet.next()) {
+            vehicleDtoList.add(
+                    new VehicleDTO(
+                            resultSet.getString(1),
+                            resultSet.getString(2),
+                            resultSet.getString(3),
+                            resultSet.getString(4),
+                            resultSet.getString(5)
+                    )
+            );
+        }
+        return vehicleDtoList;
     }
 
     public String generateNextVehicleId() throws SQLException {
@@ -126,7 +155,5 @@ public class VehicleModel {
             return "V001";
         }
     }
-
-
 
 }
