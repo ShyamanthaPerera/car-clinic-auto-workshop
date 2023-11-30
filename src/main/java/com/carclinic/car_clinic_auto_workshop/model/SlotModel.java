@@ -93,7 +93,24 @@ public class SlotModel {
         return SlotDtoList;
     }
 
+    public List<SlotDTO> getAllStatus() throws SQLException {
 
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement statement = connection.prepareStatement(LOAD_ALL_STATUS);
+        ResultSet resultSet = statement.executeQuery();
+
+        ArrayList<SlotDTO> SlotDtoList = new ArrayList<>();
+
+        while(resultSet.next()) {
+            SlotDtoList.add(
+                    new SlotDTO(
+                            resultSet.getString(1),
+                            resultSet.getString(2),null,null
+                    )
+            );
+        }
+        return SlotDtoList;
+    }
 
 
 }

@@ -11,6 +11,7 @@ import java.io.IOException;
 public class DashboardFormController {
 
     public AnchorPane root;
+
     @FXML
     private Label lblLogginUser;
 
@@ -23,8 +24,8 @@ public class DashboardFormController {
     @FXML
     void btnAppointmentsOnAction(ActionEvent event) throws IOException {
 
-//        root.getChildren().clear();
-//        root.getChildren().add(FXMLLoader.load(getClass().getResource("/view/.fxml")));
+        root.getChildren().clear();
+        root.getChildren().add(FXMLLoader.load(getClass().getResource("/view/AppointmentForm.fxml")));
 
     }
 

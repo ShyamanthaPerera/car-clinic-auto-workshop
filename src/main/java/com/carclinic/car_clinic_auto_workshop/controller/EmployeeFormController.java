@@ -1,5 +1,6 @@
 package com.carclinic.car_clinic_auto_workshop.controller;
 
+import com.carclinic.car_clinic_auto_workshop.dto.CustomerDTO;
 import com.carclinic.car_clinic_auto_workshop.dto.EmployeeDTO;
 import com.carclinic.car_clinic_auto_workshop.dto.tm.EmployeeTM;
 import com.carclinic.car_clinic_auto_workshop.model.EmployeeModel;
@@ -18,6 +19,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -91,6 +93,10 @@ public class EmployeeFormController {
     ObservableList<EmployeeTM> observableList = FXCollections.observableArrayList();
 
     EmployeeModel employeeModel = new EmployeeModel();
+
+    public AppointmentFormController appointmentFormController;
+
+    public Stage stage;
 
     public void initialize(){
         setCellValueFactory();
@@ -208,22 +214,34 @@ public class EmployeeFormController {
         });
     }
 
+    private void setSelectBtnAction(Button btn, EmployeeDTO employeeDTO) {
+        btn.setOnAction((e) -> {
+
+
+        });
+    }
+
     private void loadAllEmployees() {
         try {
             List<EmployeeDTO> dtoList = employeeModel.getAllEmployee();
-            mapCustomerTableVal(dtoList);
+            mapEmployeeTableVal(dtoList);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private void mapCustomerTableVal(List<EmployeeDTO> dtoList) {
+    private void mapEmployeeTableVal(List<EmployeeDTO> dtoList) {
         observableList.clear();
 
         for (EmployeeDTO employeeDTO : dtoList) {
             HBox hbox = new HBox();
             hbox.setSpacing(10);
-            hbox.getChildren().addAll(createViewButton(employeeDTO), createUpdateButton(employeeDTO), createDeleteButton(employeeDTO));
+
+            if (appointmentFormController==null){
+                hbox.getChildren().addAll(createViewButton(employeeDTO), createUpdateButton(employeeDTO), createDeleteButton(employeeDTO));
+            }else {
+                hbox.getChildren().addAll(createViewButton(employeeDTO), createUpdateButton(employeeDTO), createDeleteButton(employeeDTO), createSelectButton(employeeDTO));
+            }
 
             observableList.add(
                     new EmployeeTM(
@@ -283,6 +301,22 @@ public class EmployeeFormController {
         btn.setGraphic(imageView);
         return btn;
     }
+
+    private JFXButton createSelectButton(EmployeeDTO employeeDTO) {
+        JFXButton btn = new JFXButton();
+        setSelectBtnAction(btn, employeeDTO);
+        btn.setCursor(Cursor.HAND);
+        btn.setStyle("-fx-background-color: #ff4d4d;");
+
+        Image image = new Image(getClass().getResourceAsStream("/view/images/icons8-select-90.png"));
+        ImageView imageView = new ImageView(image);
+        imageView.setFitWidth(16);
+        imageView.setFitHeight(16);
+
+        btn.setGraphic(imageView);
+        return btn;
+    }
+
     private void employeeclearFields() {
         textEmployeeID.setText("");
         textEmployeeName.setText("");
@@ -308,7 +342,7 @@ public class EmployeeFormController {
         if (!txtdynamicSearch.getText().trim().isEmpty()) {
             try {
                 List<EmployeeDTO> dtoList = employeeModel.getAllEmployeeBySearch(txtdynamicSearch.getText());
-                mapCustomerTableVal(dtoList);
+                mapEmployeeTableVal(dtoList);
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
@@ -373,5 +407,10 @@ public class EmployeeFormController {
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
+    }
+
+    public void setScene(Stage stage, AppointmentFormController appointmentFormController) {
+        this.appointmentFormController = appointmentFormController;
+        this.stage = stage;
     }
 }

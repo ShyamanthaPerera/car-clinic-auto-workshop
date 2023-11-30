@@ -148,6 +148,12 @@ public class VehicleFormController {
         }
     }
 
+    public void setScene(Stage stage, AppointmentFormController appointmentFormController) {
+        this.appointmentFormController = appointmentFormController;
+        this.stage = stage;
+        loadAllVehicles();
+    }
+
     public void getData(CustomerDTO customer) {
         textCustomerID.setText(customer.getCusId());
         textCustomerName.setText(customer.getCusName());

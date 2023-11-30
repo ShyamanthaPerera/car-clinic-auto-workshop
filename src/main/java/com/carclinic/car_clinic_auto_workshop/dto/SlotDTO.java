@@ -14,4 +14,6 @@ public class SlotDTO {
     private String status;
     private String space;
     private String chargingOutlet;
+
+
 }

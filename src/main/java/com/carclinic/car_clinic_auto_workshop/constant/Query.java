@@ -86,6 +86,7 @@ public class Query {
     public static final String DELETE_SLOT = "DELETE FROM slot WHERE slot_id = ?";
     public static final String SEARCH_SLOT = "SELECT * FROM slot WHERE slot_id = ?";
     public static final String LOAD_ALL_SLOT =  "SELECT * FROM slot";
+    public static final String LOAD_ALL_STATUS =  "SELECT * FROM slot";
 
 
     /**
