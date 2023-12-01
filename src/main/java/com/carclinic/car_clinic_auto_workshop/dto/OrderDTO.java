@@ -11,8 +11,8 @@ import lombok.*;
 public class OrderDTO {
 
     private String orderId;
+    private String app_id;
     private String amount;
     private String date;
     private String time;
-    private String slotId;
 }

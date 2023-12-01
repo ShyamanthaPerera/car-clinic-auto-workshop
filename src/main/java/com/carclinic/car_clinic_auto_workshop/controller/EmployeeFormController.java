@@ -1,7 +1,7 @@
 package com.carclinic.car_clinic_auto_workshop.controller;
 
-import com.carclinic.car_clinic_auto_workshop.dto.CustomerDTO;
 import com.carclinic.car_clinic_auto_workshop.dto.EmployeeDTO;
+import com.carclinic.car_clinic_auto_workshop.dto.tm.AppointmentEmployeeTM;
 import com.carclinic.car_clinic_auto_workshop.dto.tm.EmployeeTM;
 import com.carclinic.car_clinic_auto_workshop.model.EmployeeModel;
 import com.jfoenix.controls.JFXButton;
@@ -28,77 +28,54 @@ import java.util.regex.Pattern;
 
 public class EmployeeFormController {
 
+    public AppointmentFormController appointmentFormController;
+    public Stage stage;
+    boolean isUpdate;
+    ObservableList<EmployeeTM> observableList = FXCollections.observableArrayList();
+    ObservableList<AppointmentEmployeeTM> observableListt = FXCollections.observableArrayList();
+    EmployeeModel employeeModel = new EmployeeModel();
     @FXML
     private Label lblName;
-
     @FXML
     private Label lblId;
-
     @FXML
     private Label lblAddress;
-
     @FXML
     private Label lblNumber;
-
     @FXML
     private Label lblDesignation;
-
     @FXML
     private JFXButton employeeUpdateBtn;
-
     @FXML
     private JFXButton employeeAddBtn;
-
     @FXML
     private TextField textEmployeeID;
-
     @FXML
     private TextField textEmployeeName;
-
     @FXML
     private TextField textEmployeeAddress;
-
     @FXML
     private TextField textEmployeeNumber;
-
     @FXML
     private TextField textEmployeeDesignation;
-
     @FXML
     private TableView<EmployeeTM> EmployeeTbl;
-
     @FXML
     private TableColumn<?, ?> EmployeeIDCol;
-
     @FXML
     private TableColumn<?, ?> EmployeeNameCol;
-
     @FXML
     private TableColumn<?, ?> addressCol;
-
     @FXML
     private TableColumn<?, ?> numberCol;
-
     @FXML
     private TableColumn<?, ?> designationCol;
-
     @FXML
     private TableColumn<?, ?> actionCol;
-
     @FXML
     private JFXTextField txtdynamicSearch;
 
-    boolean isUpdate;
-
-    ObservableList<EmployeeTM> observableList = FXCollections.observableArrayList();
-
-    EmployeeModel employeeModel = new EmployeeModel();
-
-    public AppointmentFormController appointmentFormController;
-
-    public Stage stage;
-
-    public void initialize(){
+    public void initialize() {
         setCellValueFactory();
         loadAllEmployees();
         employeeAddBtn.setDisable(true);
@@ -217,9 +194,23 @@ public class EmployeeFormController {
     private void setSelectBtnAction(Button btn, EmployeeDTO employeeDTO) {
         btn.setOnAction((e) -> {
 
+            if(appointmentFormController!=null){
+                appointmentFormController.getEmployeeData(employeeDTO);
+                stage.hide();
+            }
 
+
+//            List<EmployeeDTO> dtoList = null;
+//            try {
+//                dtoList = employeeModel.getAllEmployeeIDAndName();
+//            } catch (SQLException ex) {
+//                throw new RuntimeException(ex);
+//            }
+//            mapAppointmentEmployeeTableVal(dtoList);
         });
     }
+
+
 
     private void loadAllEmployees() {
         try {
@@ -237,9 +228,9 @@ public class EmployeeFormController {
             HBox hbox = new HBox();
             hbox.setSpacing(10);
 
-            if (appointmentFormController==null){
+            if (appointmentFormController == null) {
                 hbox.getChildren().addAll(createViewButton(employeeDTO), createUpdateButton(employeeDTO), createDeleteButton(employeeDTO));
-            }else {
+            } else {
                 hbox.getChildren().addAll(createViewButton(employeeDTO), createUpdateButton(employeeDTO), createDeleteButton(employeeDTO), createSelectButton(employeeDTO));
             }
 
@@ -326,7 +317,7 @@ public class EmployeeFormController {
 
         employeeAddBtn.setDisable(true);
         employeeUpdateBtn.setDisable(true);
-        isUpdate=false;
+        isUpdate = false;
 
         generateNextEmployeeId();
         loadAllEmployees();
@@ -370,13 +361,13 @@ public class EmployeeFormController {
         if (name && address && number && designation) {
             if (isUpdate) {
                 employeeUpdateBtn.setDisable(false);
-            }else {
+            } else {
                 employeeAddBtn.setDisable(false);
             }
         } else {
             if (isUpdate) {
                 employeeUpdateBtn.setDisable(true);
-            }else {
+            } else {
                 employeeAddBtn.setDisable(true);
             }
         }
@@ -387,9 +378,9 @@ public class EmployeeFormController {
         if (Pattern.matches(regex, name.getText())) {
             name.getParent().setStyle("-fx-border-color: green");
             if (keyEvent.getCode() == KeyCode.ENTER) {
-                if(nextName!=null){
+                if (nextName != null) {
                     nextName.requestFocus();
-                }else {
+                } else {
                     employeeAddBtn.requestFocus();
                 }
             }
@@ -412,5 +403,6 @@ public class EmployeeFormController {
     public void setScene(Stage stage, AppointmentFormController appointmentFormController) {
         this.appointmentFormController = appointmentFormController;
         this.stage = stage;
+        loadAllEmployees();
     }
 }

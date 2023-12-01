@@ -1,5 +1,6 @@
 package com.carclinic.car_clinic_auto_workshop.controller;
 
+import com.carclinic.car_clinic_auto_workshop.dto.CustomerDTO;
 import com.carclinic.car_clinic_auto_workshop.dto.ItemDTO;
 import com.carclinic.car_clinic_auto_workshop.dto.tm.ItemTM;
 import com.carclinic.car_clinic_auto_workshop.model.ItemModel;
@@ -18,6 +19,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -89,6 +91,10 @@ public class ItemFormController {
     ItemModel itemModell = new ItemModel();
 
     ObservableList<ItemTM> observableList = FXCollections.observableArrayList();
+
+    public AppointmentFormController appointmentFormController;
+
+    public Stage stage;
 
     boolean isUpdate;
 
@@ -210,6 +216,15 @@ public class ItemFormController {
         });
     }
 
+    private void setSelectBtnAction(Button btn, ItemDTO itemDTO) {
+        btn.setOnAction((e) -> {
+            if(appointmentFormController!=null){
+                appointmentFormController.getItemData(itemDTO);
+                stage.hide();
+            }
+        });
+    }
+
     private void loadAllItems() {
         try {
             List<ItemDTO> dtoList = itemModell.getAllItem();
@@ -262,7 +277,12 @@ public class ItemFormController {
         for (ItemDTO itemDTO : dtoList) {
             HBox hbox = new HBox();
             hbox.setSpacing(10);
-            hbox.getChildren().addAll(createViewButton(itemDTO), createUpdateButton(itemDTO), createDeleteButton(itemDTO));
+
+            if(appointmentFormController == null){
+                hbox.getChildren().addAll(createViewButton(itemDTO), createUpdateButton(itemDTO), createDeleteButton(itemDTO));
+            }else {
+                hbox.getChildren().addAll(createViewButton(itemDTO), createUpdateButton(itemDTO), createDeleteButton(itemDTO),createSelectButton(itemDTO));
+            }
 
             observableList.add(
                     new ItemTM(
@@ -315,6 +335,21 @@ public class ItemFormController {
         btn.setStyle("-fx-background-color: #ff4d4d;");
 
         Image image = new Image(getClass().getResourceAsStream("/view/images/icons8-delete-90.png"));
+        ImageView imageView = new ImageView(image);
+        imageView.setFitWidth(16);
+        imageView.setFitHeight(16);
+
+        btn.setGraphic(imageView);
+        return btn;
+    }
+
+    private JFXButton createSelectButton(ItemDTO itemDTO) {
+        JFXButton btn = new JFXButton();
+        setSelectBtnAction(btn, itemDTO);
+        btn.setCursor(Cursor.HAND);
+        btn.setStyle("-fx-background-color: #ff4d4d;");
+
+        Image image = new Image(getClass().getResourceAsStream("/view/images/icons8-select-90.png"));
         ImageView imageView = new ImageView(image);
         imageView.setFitWidth(16);
         imageView.setFitHeight(16);
@@ -378,5 +413,11 @@ public class ItemFormController {
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
+    }
+
+    public void setScene(Stage stage, AppointmentFormController appointmentFormController) {
+        this.appointmentFormController = appointmentFormController;
+        this.stage = stage;
+        loadAllItems();
     }
 }

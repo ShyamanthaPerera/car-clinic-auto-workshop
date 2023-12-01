@@ -14,4 +14,9 @@ public class EmployeeDTO {
     private String address;
     private String telNum;
     private String designation;
+
+    public EmployeeDTO(String empId, String name) {
+        this.empId = empId;
+        this.name = name;
+    }
 }

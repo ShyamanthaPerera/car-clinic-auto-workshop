@@ -105,7 +105,9 @@ public class SlotModel {
             SlotDtoList.add(
                     new SlotDTO(
                             resultSet.getString(1),
-                            resultSet.getString(2),null,null
+                            resultSet.getString(2),
+                            resultSet.getString(3),
+                            resultSet.getString(4)
                     )
             );
         }

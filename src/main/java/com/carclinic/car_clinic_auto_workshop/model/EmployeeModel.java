@@ -125,6 +125,25 @@ public class EmployeeModel {
         return EmployeeDtoList;
     }
 
+    public List<EmployeeDTO> getAllEmployeeIDAndName() throws SQLException {
+
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement statement = connection.prepareStatement(LOAD_ALL_EMPLOYEE);
+        ResultSet resultSet = statement.executeQuery();
+
+        ArrayList<EmployeeDTO> EmployeeDtoList = new ArrayList<>();
+
+        while(resultSet.next()) {
+            EmployeeDtoList.add(
+                    new EmployeeDTO(
+                            resultSet.getString(1),
+                            resultSet.getString(2)
+                    )
+            );
+        }
+        return EmployeeDtoList;
+    }
+
     public String generateNextCustomerId() throws SQLException {
 
         Connection connection = DbConnection.getInstance().getConnection();

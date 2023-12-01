@@ -162,8 +162,8 @@
                                 <TableColumn fx:id="itemModelCol" prefWidth="126.0" text="Item Model" />
                                 <TableColumn fx:id="itemDescriptionCol" prefWidth="99.0" text="Description" />
                                 <TableColumn fx:id="UnitPriceCol" prefWidth="154.0" text="Unit Price" />
-                                <TableColumn fx:id="quantityCol" prefWidth="143.0" text="Quantity" />
-                                <TableColumn fx:id="actionCol" prefWidth="132.0" text="Action" />
+                                <TableColumn fx:id="quantityCol" prefWidth="110.0" text="Quantity" />
+                                <TableColumn fx:id="actionCol" prefWidth="165.0" text="Action" />
                             </columns>
                         </TableView>
                         <JFXTextField fx:id="txtdynamicSearch" labelFloat="true" layoutX="251.0" layoutY="22.0" onKeyReleased="#dynamicSearchAction" prefHeight="31.0" prefWidth="277.0" promptText="Dynamic Search" />

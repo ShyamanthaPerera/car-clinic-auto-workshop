@@ -5,11 +5,12 @@ public class Query {
     /**
      * Appointment
      */
-    public static final String SAVE_APPOINTMENT = "INSERT INTO appointment VALUES(?, ?, ?, ?, ?, ?, ?)";
+    public static final String SAVE_APPOINTMENT = "INSERT INTO appointment VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     public static final String UPDATE_APPOINTMENT = "UPDATE appointment SET cus_id = ?, vcl_id = ?, slot_id = ?, date = ? time = ?, issue = ? WHERE appointment_id = ?";
     public static final String DELETE_APPOINTMENT = "DELETE FROM appointment WHERE appointment_id = ?";
     public static final String SEARCH_APPOINTMENT = "SELECT * FROM appointment WHERE appointment_id = ?";
     public static final String LOAD_ALL_APPOINTMENT =  "SELECT * FROM appointment";
+    public static final String GET_LAST_APPOINTMENT_ID = "SELECT appointment_id FROM appointment ORDER BY appointment_id DESC LIMIT 1";
 
 
     /**
@@ -27,7 +28,7 @@ public class Query {
     /**
      * Employee_Appointment
      */
-    public static final String SAVE_EMPLOYEE_APPOINTMENT = "INSERT INTO employee_appointment VALUES(?, ?)";
+    public static final String SAVE_EMPLOYEE_APPOINTMENT = "INSERT INTO employee_appointment VALUES(?, ?, ?, ?, ?, ?)";
 //    public static final String UPDATE_EMPLOYEE_APPOINTMENT = "UPDATE employee_appointment SET user = ?, name = ?, address = ?, tele = ? WHERE id = ?";
 //    public static final String DELETE_EMPLOYEE_APPOINTMENT = "DELETE FROM employee_appointment WHERE id = ?";
 //    public static final String SEARCH_EMPLOYEE_APPOINTMENT = "SELECT * FROM employee_appointment WHERE id = ?";
@@ -56,12 +57,15 @@ public class Query {
     public static final String LOAD_ALL_ITEM =  "SELECT * FROM item";
     public static final String LOAD_ALL_ITEMS_BY_SEARCH_VAL =  "SELECT * FROM item WHERE item_id LIKE ? OR model LIKE ? OR description LIKE ? OR unit_price LIKE ? OR qty_on_hand LIKE ?";
     public static final String GET_LAST_ITEM_ID = "SELECT item_id FROM item ORDER BY item_id DESC LIMIT 1";
+    public static final String UPDATE_NEW_QTY = "UPDATE item SET qty_on_hand = qty_on_hand - ? WHERE item_id = ?";
+    public static final String UPDATE_SLOT_STATUS = "UPDATE slot SET status = ? WHERE slot_id = ?";
+
 
 
     /**
      * Order_Detail
      */
-    public static final String SAVE_ORDER_DETAIL = "INSERT INTO order_detail VALUES(?, ?)";
+    public static final String SAVE_ORDER_DETAIL = "INSERT INTO order_detail VALUES(?, ?, ?, ?, ?, ?, ?)";
 //    public static final String UPDATE_ORDER_DETAIL = "UPDATE order_detail SET address = ?, tele = ? WHERE id = ?";
 //    public static final String DELETE_ORDER_DETAIL = "DELETE FROM order_detail WHERE id = ?";
 //    public static final String SEARCH_ORDER_DETAIL = "SELECT * FROM order_detail WHERE id = ?";
@@ -71,11 +75,12 @@ public class Query {
     /**
      * Order
      */
-    public static final String SAVE_ORDER = "INSERT INTO order VALUES(?, ?, ?, ?, ?)";
+    public static final String SAVE_ORDER = "INSERT INTO ordertbl VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
     public static final String UPDATE_ORDER = "UPDATE order SET amount = ?, date = ?, time = ?, slot_id = ? WHERE ord_id = ?";
     public static final String DELETE_ORDER = "DELETE FROM order WHERE ord_id = ?";
     public static final String SEARCH_ORDER = "SELECT * FROM order WHERE ord_id = ?";
     public static final String LOAD_ALL_ORDER =  "SELECT * FROM order";
+    public static final String GET_LAST_ORDER_ID = "SELECT ord_id FROM ordertbl ORDER BY ord_id DESC LIMIT 1";
 
 
     /**
