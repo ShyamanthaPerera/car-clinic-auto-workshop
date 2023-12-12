@@ -216,7 +216,7 @@ public class AppointmentFormController {
         btn.setCursor(Cursor.HAND);
         btn.setStyle("-fx-background-color: #ff4d4d;");
 
-        Image image = new Image(getClass().getResourceAsStream("/view/images/icons8-delete-90.png"));
+        Image image = new Image(getClass().getResourceAsStream("/com/carclinic/car_clinic_auto_workshop/view/images/icons8-delete-90.png"));
         ImageView imageView = new ImageView(image);
         imageView.setFitWidth(16);
         imageView.setFitHeight(16);
@@ -243,7 +243,7 @@ public class AppointmentFormController {
     @FXML
     void btnAddVehicleOnActionInAppointment(ActionEvent event) {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/VehicleForm.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/carclinic/car_clinic_auto_workshop/view/VehicleForm.fxml"));
         try {
             Parent root = loader.load();
             Stage stage = new Stage();
@@ -269,7 +269,7 @@ public class AppointmentFormController {
 
     public void btnAddEmployeeOnActionInAppointment(ActionEvent actionEvent) {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/EmployeeForm.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/carclinic/car_clinic_auto_workshop/view/EmployeeForm.fxml"));
         try {
             Parent root = loader.load();
             Stage stage = new Stage();
@@ -284,7 +284,7 @@ public class AppointmentFormController {
 
     public void btnAddSlotOnActionInAppointment(ActionEvent actionEvent) {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/SlotForm.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/carclinic/car_clinic_auto_workshop/view/SlotForm.fxml"));
         try {
             Parent root = loader.load();
             Stage stage = new Stage();
@@ -298,7 +298,7 @@ public class AppointmentFormController {
     }
 
     public void btnAddItemOnActionInAppointment(ActionEvent actionEvent) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ItemForm.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/carclinic/car_clinic_auto_workshop/view/ItemForm.fxml"));
         try {
             Parent root = loader.load();
             Stage stage = new Stage();
@@ -386,7 +386,7 @@ public class AppointmentFormController {
         btn.setCursor(Cursor.HAND);
         btn.setStyle("-fx-background-color: #ff4d4d;");
 
-        Image image = new Image(getClass().getResourceAsStream("/view/images/icons8-delete-90.png"));
+        Image image = new Image(getClass().getResourceAsStream("/com/carclinic/car_clinic_auto_workshop/view/images/icons8-delete-90.png"));
         ImageView imageView = new ImageView(image);
         imageView.setFitWidth(16);
         imageView.setFitHeight(16);
@@ -560,7 +560,7 @@ public class AppointmentFormController {
         btn.setCursor(Cursor.HAND);
         btn.setStyle("-fx-background-color: #a29bfe;");
 
-        Image image = new Image(getClass().getResourceAsStream("/view/images/icons8-eye-96.png"));
+        Image image = new Image(getClass().getResourceAsStream("/com/carclinic/car_clinic_auto_workshop/view/images/icons8-eye-96.png"));
         ImageView imageView = new ImageView(image);
         imageView.setFitWidth(16);
         imageView.setFitHeight(16);
@@ -575,7 +575,7 @@ public class AppointmentFormController {
         btn.setCursor(Cursor.HAND);
         btn.setStyle("-fx-background-color: #817703;");
 
-        Image image = new Image(getClass().getResourceAsStream("/view/images/icons8-update-64.png"));
+        Image image = new Image(getClass().getResourceAsStream("/com/carclinic/car_clinic_auto_workshop/view/images/icons8-update-64.png"));
         ImageView imageView = new ImageView(image);
         imageView.setFitWidth(16);
         imageView.setFitHeight(16);
@@ -590,7 +590,7 @@ public class AppointmentFormController {
         btn.setCursor(Cursor.HAND);
         btn.setStyle("-fx-background-color: #ff4d4d;");
 
-        Image image = new Image(getClass().getResourceAsStream("/view/images/icons8-delete-90.png"));
+        Image image = new Image(getClass().getResourceAsStream("/com/carclinic/car_clinic_auto_workshop/view/images/icons8-delete-90.png"));
         ImageView imageView = new ImageView(image);
         imageView.setFitWidth(16);
         imageView.setFitHeight(16);

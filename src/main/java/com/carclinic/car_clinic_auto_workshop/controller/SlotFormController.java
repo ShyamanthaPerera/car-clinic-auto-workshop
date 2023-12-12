@@ -168,10 +168,10 @@ public class SlotFormController {
         this.slotDTO = slotDTO;
 
         if (slotDTO.getStatus().equals("FREE")) {
-            image = new Image(getClass().getResourceAsStream("/view/images/icons8-car-repair-642.png"));
+            image = new Image(getClass().getResourceAsStream("/com/carclinic/car_clinic_auto_workshop/view/images/icons8-car-repair-642.png"));
             button.setStyle("-fx-background-color: #3498db; -fx-text-fill: white;");
         } else {
-            image = new Image(getClass().getResourceAsStream("/view/images/icons8-car-repair-64 (1).png"));
+            image = new Image(getClass().getResourceAsStream("/com/carclinic/car_clinic_auto_workshop/view/images/icons8-car-repair-64 (1).png"));
             button.setStyle("-fx-background-color: #19567c; -fx-text-fill: white;");
         }
         ImageView imageView = new ImageView(image);

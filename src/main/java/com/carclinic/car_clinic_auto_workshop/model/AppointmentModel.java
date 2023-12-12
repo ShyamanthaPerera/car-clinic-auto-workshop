@@ -56,6 +56,7 @@ public class AppointmentModel {
     public boolean saveAppointment(AppointmentDTO dto, Connection connection) throws SQLException {
 
         PreparedStatement statement = connection.prepareStatement(SAVE_APPOINTMENT);
+
         statement.setString(1, dto.getAppointmentId());
         statement.setString(2, dto.getSlotId());
         statement.setString(3, dto.getVehicleId());

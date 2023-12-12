@@ -25,7 +25,7 @@ public class DashboardFormController {
     void btnAppointmentsOnAction(ActionEvent event) throws IOException {
 
         root.getChildren().clear();
-        root.getChildren().add(FXMLLoader.load(getClass().getResource("/view/AppointmentForm.fxml")));
+        root.getChildren().add(FXMLLoader.load(getClass().getResource("/com/carclinic/car_clinic_auto_workshop/view/AppointmentForm.fxml")));
 
     }
 
@@ -33,7 +33,7 @@ public class DashboardFormController {
     void btnCustomersOnAction(ActionEvent event) throws IOException {
 
         root.getChildren().clear();
-        root.getChildren().add(FXMLLoader.load(getClass().getResource("/view/CustomerForm.fxml")));
+        root.getChildren().add(FXMLLoader.load(getClass().getResource("/com/carclinic/car_clinic_auto_workshop/view/CustomerForm.fxml")));
 
     }
 
@@ -41,21 +41,21 @@ public class DashboardFormController {
     void btnDashboardOnAction(ActionEvent event) throws IOException {
 
         root.getChildren().clear();
-        root.getChildren().add(FXMLLoader.load(getClass().getResource("/view/SlotForm.fxml")));
+        root.getChildren().add(FXMLLoader.load(getClass().getResource("/com/carclinic/car_clinic_auto_workshop/view/SlotForm.fxml")));
 
     }
 
     @FXML
     void btnEmployeesOnAction(ActionEvent event) throws IOException {
         root.getChildren().clear();
-        root.getChildren().add(FXMLLoader.load(getClass().getResource("/view/EmployeeForm.fxml")));
+        root.getChildren().add(FXMLLoader.load(getClass().getResource("/com/carclinic/car_clinic_auto_workshop/view/EmployeeForm.fxml")));
     }
 
     @FXML
     void btnItemsOnAction(ActionEvent event) throws IOException {
 
         root.getChildren().clear();
-        root.getChildren().add(FXMLLoader.load(getClass().getResource("/view/ItemForm.fxml")));
+        root.getChildren().add(FXMLLoader.load(getClass().getResource("/com/carclinic/car_clinic_auto_workshop/view/ItemForm.fxml")));
 
     }
 
@@ -71,7 +71,7 @@ public class DashboardFormController {
     void btnSuppliersOnAction(ActionEvent event) throws IOException {
 
         root.getChildren().clear();
-        root.getChildren().add(FXMLLoader.load(getClass().getResource("/view/SupplierForm.fxml")));
+        root.getChildren().add(FXMLLoader.load(getClass().getResource("/com/carclinic/car_clinic_auto_workshop/view/SupplierForm.fxml")));
 
     }
 
@@ -79,7 +79,7 @@ public class DashboardFormController {
     void btnUsersOnAction(ActionEvent event) throws IOException {
 
         root.getChildren().clear();
-        root.getChildren().add(FXMLLoader.load(getClass().getResource("/view/UserForm.fxml")));
+        root.getChildren().add(FXMLLoader.load(getClass().getResource("/com/carclinic/car_clinic_auto_workshop/view/UserForm.fxml")));
 
     }
 
@@ -87,7 +87,7 @@ public class DashboardFormController {
     void btnVehiclesOnAction(ActionEvent event) throws IOException {
 
         root.getChildren().clear();
-        root.getChildren().add(FXMLLoader.load(getClass().getResource("/view/VehicleForm.fxml")));
+        root.getChildren().add(FXMLLoader.load(getClass().getResource("/com/carclinic/car_clinic_auto_workshop/view/VehicleForm.fxml")));
 
     }
 }

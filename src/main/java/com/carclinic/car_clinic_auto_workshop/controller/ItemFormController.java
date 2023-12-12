@@ -1,6 +1,5 @@
 package com.carclinic.car_clinic_auto_workshop.controller;
 
-import com.carclinic.car_clinic_auto_workshop.dto.CustomerDTO;
 import com.carclinic.car_clinic_auto_workshop.dto.ItemDTO;
 import com.carclinic.car_clinic_auto_workshop.dto.tm.ItemTM;
 import com.carclinic.car_clinic_auto_workshop.model.ItemModel;
@@ -304,7 +303,7 @@ public class ItemFormController {
         btn.setCursor(Cursor.HAND);
         btn.setStyle("-fx-background-color: #a29bfe;");
 
-        Image image = new Image(getClass().getResourceAsStream("/view/images/icons8-eye-96.png"));
+        Image image = new Image(getClass().getResourceAsStream("/com/carclinic/car_clinic_auto_workshop/view/images/icons8-eye-96.png"));
         ImageView imageView = new ImageView(image);
         imageView.setFitWidth(16);
         imageView.setFitHeight(16);
@@ -319,7 +318,7 @@ public class ItemFormController {
         btn.setCursor(Cursor.HAND);
         btn.setStyle("-fx-background-color: #817703;");
 
-        Image image = new Image(getClass().getResourceAsStream("/view/images/icons8-update-64.png"));
+        Image image = new Image(getClass().getResourceAsStream("/com/carclinic/car_clinic_auto_workshop/view/images/icons8-update-64.png"));
         ImageView imageView = new ImageView(image);
         imageView.setFitWidth(16);
         imageView.setFitHeight(16);
@@ -334,7 +333,7 @@ public class ItemFormController {
         btn.setCursor(Cursor.HAND);
         btn.setStyle("-fx-background-color: #ff4d4d;");
 
-        Image image = new Image(getClass().getResourceAsStream("/view/images/icons8-delete-90.png"));
+        Image image = new Image(getClass().getResourceAsStream("/com/carclinic/car_clinic_auto_workshop/view/images/icons8-delete-90.png"));
         ImageView imageView = new ImageView(image);
         imageView.setFitWidth(16);
         imageView.setFitHeight(16);
@@ -349,7 +348,7 @@ public class ItemFormController {
         btn.setCursor(Cursor.HAND);
         btn.setStyle("-fx-background-color: #ff4d4d;");
 
-        Image image = new Image(getClass().getResourceAsStream("/view/images/icons8-select-90.png"));
+        Image image = new Image(getClass().getResourceAsStream("/com/carclinic/car_clinic_auto_workshop/view/images/icons8-select-90.png"));
         ImageView imageView = new ImageView(image);
         imageView.setFitWidth(16);
         imageView.setFitHeight(16);
